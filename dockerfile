@@ -1,4 +1,4 @@
-#docker container run -itd -p "host_port":8080 -v "host_dir":/var/jenkins_home --name jenkins-local jenkins/jenkins:lts
+#docker run -p 8080:8080 -u root -v "host-path":/var/jenkins_home --name=jenkins-master jenkins/jenkins
 FROM ubuntu:latest
 RUN apt-get update && apt-get upgrade -y
 RUN apt-get install nginx -y
