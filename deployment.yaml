@@ -24,4 +24,4 @@ spec:
       - name: my-nginx-container
         image: mohamed1311990/webapp:5
         ports:
-        - containerPort: 80
+        - containerPort: 3000
