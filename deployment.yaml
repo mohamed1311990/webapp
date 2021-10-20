@@ -32,10 +32,11 @@ kind: Service
 metadata:
   name: webapp-service
 spec:
-  type: LoadBalancer
+  type: NodePort
   selector:
     app: my-nginx-pod  
   ports:
     - protocol: TCP
+      nodePort: 32223
       port: 80
-      targetPort: 3000
+      targetPort: 80
