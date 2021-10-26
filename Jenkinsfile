@@ -8,7 +8,7 @@ pipeline {
     stages {
         stage('git') {
             steps { git branch: 'main', url: 'https://github.com/mohamed1311990/webapp.git' 
-            }
+             }
         }
 
         stage('Building our image') { 
@@ -37,18 +37,13 @@ pipeline {
         stage('Deploy App') {
              steps {
                   sshagent(['k8s'] {
-                      sh "scp -o StrictHostKeyChecking=no deployment.yaml mo@localhost:/home/mo"
+                      sh "scp -o StrictHostKeyChecking=no deployment.yaml ubuntu@localhost:/home/ubuntu"
                       script{
-                          try{
-                              sh "ssh mo@localhost kubectl apply -f ."
-                              }
-                          catch(error){
-                              sh "ssh mo@localhost kubectl apply -f ."                       
-                              }     
+                          try{sh "ssh ubuntu@localhost kubectl apply -f ." }
+                          catch(error){ sh "ssh ubuntu@localhost kubectl apply -f ." }     
                       }
-                  }
-          }                       
-      }
-   }
-}
+                  }                    
+              }
+          }
+     }
 
