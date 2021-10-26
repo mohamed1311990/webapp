@@ -7,36 +7,48 @@ pipeline {
     agent any 
     stages {
         stage('git') {
-            steps { git branch: 'main', url: 'https://github.com/mohamed1311990/webapp.git' }
+            steps { git branch: 'main', url: 'https://github.com/mohamed1311990/webapp.git' 
+            }
         }
-    stage('Building our image') { 
+
+        stage('Building our image') { 
             steps { 
                 script { 
                     dockerImage = docker.build registry + ":$BUILD_NUMBER" 
                 }
-            } 
-     }
-    stage('Deploy our image') { 
-            steps { 
+            }
+        }
+
+        stage('Deploy our image') { 
+           steps { 
                 script { 
                     docker.withRegistry( '', registryCredential ) { 
                         dockerImage.push() 
                     }
-                } 
+                }
+            } 
+         }
+
+
+        stage('Cleaning up') { 
+            steps {  sh "docker rmi $registry:$BUILD_NUMBER"  }  
             }
-     } 
-     stage('Cleaning up') { 
-            steps { 
-                sh "docker rmi $registry:$BUILD_NUMBER" 
-            }
-        }     
-    }
     
-     stage('Deploy App') {
+        stage('Deploy App') {
              steps {
-                  script {
-                       kubernetesDeploy(configs: 'deployment.yaml', kubeconfigId: 'mykubeconfig')
+                  sshagent(['k8s'] {
+                      sh "scp -o StrictHostKeyChecking=no deployment.yaml mo@localhost:/home/mo"
+                      script{
+                          try{
+                              sh "ssh mo@localhost kubectl apply -f ."
+                              }
+                          catch(error){
+                              sh "ssh mo@localhost kubectl apply -f ."                       
+                              }     
+                      }
                   }
-             }
+          }                       
       }
+   }
 }
+
