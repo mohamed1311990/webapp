@@ -43,7 +43,6 @@ pipeline {
                           catch(error){ sh "ssh ubuntu@localhost kubectl apply -f ." }     
                       }
                   }                    
-              }
           }
      }
 }
