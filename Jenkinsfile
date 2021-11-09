@@ -39,9 +39,9 @@ pipeline {
             steps{
                 sshagent(['k8s-jenkins'])
                 {
-                    sh 'scp -r -o StrictHostKeyChecking=no deployment.yaml root@154.28.188.225:/home/mo/desktop/Devops/CICD/Jenkins/Projects'
+                    sh 'scp -r -o StrictHostKeyChecking=no deployment.yaml root@3.69.11.39:/home/mo/desktop/Devops/CICD/Jenkins/Projects'
                     script {
-                        try { sh 'ssh root@154.28.188.225 kubectl apply -f /home/mo/desktop/Devops/CICD/Jenkins/Projects/deployment.yaml --kubeconfig=/root/.kube/config' }
+                        try { sh 'ssh root@3.69.11.39 kubectl apply -f /home/mo/desktop/Devops/CICD/Jenkins/Projects/deployment.yaml --kubeconfig=/root/.kube/config' }
                             catch (error) { }
                     }
                 }
