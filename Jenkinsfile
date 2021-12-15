@@ -12,7 +12,7 @@ pipeline {
                   script {
                    //   sh 'echo "${BUILD_USER}"'        
                    env.user_id =  ${BUILD_USER}
-                   echo "${env.user_id}"
+                   // echo "${env.user_id}"
                   }
                  /*  sh 'echo "${BUILD_USER}"' */            
                } 
