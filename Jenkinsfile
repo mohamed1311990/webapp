@@ -10,10 +10,9 @@ pipeline {
             steps { 
                wrap([$class: 'BuildUser']) {   
                   script {
-                      sh 'echo "${BUILD_USER}"'        
-
-                   // env.user_id =  sh 'echo "${BUILD_USER}"'
-                   // echo "${env.user_id}"
+                   //   sh 'echo "${BUILD_USER}"'        
+                   env.user_id =  sh '${BUILD_USER}'
+                   echo "${env.user_id}"
                   }
                  /*  sh 'echo "${BUILD_USER}"' */            
                } 
