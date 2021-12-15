@@ -1,6 +1,6 @@
 pipeline {
     environment {
-        user_id = ' '
+        user_id = 'test var'
     }
     agent any
     
@@ -9,9 +9,9 @@ pipeline {
         stage('display user id ') {
             steps { 
                wrap([$class: 'BuildUser']) {
-                   sh '${user_id} == echo "${BUILD_USER}"' 
-                    
+                   sh 'echo "${user_id} ${BUILD_USER}"' 
                } 
+                echo "${env.user_id}"
             }
         }
     }
