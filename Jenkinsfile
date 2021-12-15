@@ -1,6 +1,6 @@
 pipeline {
     environment {
-        user_id = ' '
+        user_id = 'blank'
     }
     agent any
     
