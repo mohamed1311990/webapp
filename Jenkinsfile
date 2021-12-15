@@ -10,6 +10,7 @@ pipeline {
     {
         stage('display user id ') {
             steps {  
+                echo 'started by'
                 wrap([$class: 'BuildUser']) {
                   sh 'echo "${BUILD_USER}"'
                 }         
