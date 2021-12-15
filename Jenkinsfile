@@ -1,6 +1,6 @@
 pipeline {
     environment {
-        user_id
+        user_id="blank"
     }
     agent any
     
@@ -10,8 +10,8 @@ pipeline {
             steps { 
                wrap([$class: 'BuildUser']) {   
                   script {
-                   env.user_id =  sh 'echo "${BUILD_USER}"'
-                   echo "var = ${env.user_id}"
+                   env.user_idd =  sh 'echo "${BUILD_USER}"'
+                   echo "var = ${env.user_idd}"
                   }
                } 
             }
