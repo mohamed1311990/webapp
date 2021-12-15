@@ -11,7 +11,7 @@ pipeline {
                wrap([$class: 'BuildUser']) {   
                   script {
                    env.user_id =  sh 'echo "${BUILD_USER}"'
-                   // echo "${env.user_id}"
+                   echo "var = ${env.user_id}"
                   }
                } 
             }
