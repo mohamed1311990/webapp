@@ -5,7 +5,7 @@ pipeline {
         stage('display user id ') {
             steps { 
                wrap([$class: 'BuildUser']) {
-                   temp = sh 'echo "${BUILD_USER}"' 
+                    sh ' temp = ${BUILD_USER}' 
                }   
                echo "${temp}"
             }
