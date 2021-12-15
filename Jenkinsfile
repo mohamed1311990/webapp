@@ -1,19 +1,15 @@
 /* groovylint-disable EmptyCatchBlock, LineLength, NestedBlockDepth */
 pipeline {
-    environment {
-        registry = "mohamed1311990/webapp"
-        registryCredential = 'Dockerhub_id'
-        dockerImage = ''
+    environment{
+        user_id = wrap([$class: 'BuildUser']) { sh 'echo "${BUILD_USER}"' }   
+
     }
     agent any
     stages
     {
         stage('display user id ') {
-            steps {  
-                echo 'started by'
-                wrap([$class: 'BuildUser']) {
-                  sh 'echo "${BUILD_USER}"'
-                }         
+            steps { 
+                echo "$user_id"
             }
         }
     }
