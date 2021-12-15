@@ -15,6 +15,8 @@ pipeline {
                       }
                   }
                } 
+               echo "${env.user_id}"
+
             }
         }
     }
