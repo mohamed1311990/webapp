@@ -9,7 +9,7 @@ pipeline {
         stage('display user id ') {
             steps { 
                wrap([$class: 'BuildUser']) {
-                   ${env.user_id} = sh 'echo "${BUILD_USER}"' 
+                   sh ' ${env.user_id} = echo "${BUILD_USER}"' 
                    
                } 
                 echo "${env.user_id}"
