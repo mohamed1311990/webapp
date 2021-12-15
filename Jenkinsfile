@@ -1,17 +1,18 @@
 /* groovylint-disable EmptyCatchBlock, LineLength, NestedBlockDepth */
 pipeline {
-    environment {
-        user_id = "mo"
-    }
+   parameters {
+        string(name: 'user_id', defaultValue: '')
+   }
     agent any
     stages
     {
         stage('display user id ') {
             steps { 
                wrap([$class: 'BuildUser']) {
-                   user_id2 = sh 'echo "${BUILD_USER}"' 
+                   temp = sh 'echo "${BUILD_USER}"' 
                }   
-               echo "$user_id2"
+               env.user_id = temp
+               echo "${env.user_id}"
             }
         }
     }
