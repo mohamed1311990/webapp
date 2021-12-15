@@ -1,8 +1,7 @@
 /* groovylint-disable EmptyCatchBlock, LineLength, NestedBlockDepth */
 pipeline {
-    environment{
-        
-
+    environment {
+        user_id = "mo"
     }
     agent any
     stages
