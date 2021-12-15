@@ -12,7 +12,7 @@ pipeline {
                   script {
                       withEnv(["user_id=${BUILD_USER}"]) {
                             echo "${env.user_id}"
-                            env.user_idd=${env.user_id}
+                            env.user_idd="${env.user_id}"
                       }
                   }
                } 
