@@ -10,7 +10,7 @@ pipeline {
     {
         stage('display user id ') {
             steps {  
-                sh 'echo ${BUILD_USER}' 
+                 sh 'echo "${BUILD_USER}"' 
             }
         }
     }
