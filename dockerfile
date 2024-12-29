@@ -1,6 +1,20 @@
-#docker run -itd -p 8080:8080 -u root -v $(which docker):/usr/bin/docker -v /var/run/docker.sock:/var/run/docker.sock -v "host_path":/var/jenkins_home --name=jenkins-master jenkins/jenkins:lts
-FROM ubuntu:latest
-RUN apt-get update && apt-get upgrade -y
-RUN apt-get install nginx -y
-EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
+# Base Image
+FROM golang:latest
+
+# Set the Current Working Directory inside the container
+WORKDIR /app
+
+# Copy everything from the current directory to the PWD(Present Working Directory) inside the container
+COPY . .
+
+# Download all the dependencies
+RUN go mod download
+
+# Build the Go app
+RUN go build -o main .
+
+# Expose port 8080 to the outside world
+EXPOSE 8080
+
+# Command to run the executable
+CMD ["./main"]
